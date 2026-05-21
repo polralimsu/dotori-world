@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Shop" %} - DOTORi World{% endblock %}
+
+{% block content %}
+<div class="aws-card" style="margin-bottom: 20px;">
+    <div class="aws-card-header" style="display: flex; justify-content: space-between; align-items: center;">
+        <div>
+            <h2>{% trans "Music Store" %}</h2>
+            <strong>🌰 {% trans "My Dotori:" %}</strong> {{ user.dotori_balance }}
+        </div>
+        <a href="{% url 'shop:do_toss_payment' %}" class="btn btn-primary">🌰 {% trans "Charge Dotori" %}</a>
+    </div>
+</div>
+
+<div class="aws-card">
+    <div class="aws-card-header">
+        <h2>{% trans "Music Store" %}</h2>
+    </div>
+    <div class="aws-card-body">
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+            <thead>
+                <tr style="border-bottom: 1px solid var(--aws-border); text-align: left;">
+                    <th style="padding: 10px;">{% trans "Title" %}</th>
+                    <th style="padding: 10px;">{% trans "Artist" %}</th>
+                    <th style="padding: 10px;">{% trans "Price" %}</th>
+                    <th style="padding: 10px;">{% trans "Action" %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for music in musics %}
+                <tr style="border-bottom: 1px solid var(--aws-border); {% if music.is_purchased %}background-color: #f8faf9;{% endif %}">
+                    <td style="padding: 10px; font-weight: {% if music.is_purchased %}600{% else %}normal{% endif %};">
+                        {{ music.title }}
+                        {% if music.is_purchased %}
+                        <span style="font-size: 11px; background-color: #e6f4ea; color: #137333; padding: 2px 8px; border-radius: 12px; margin-left: 8px; font-weight: 500; display: inline-flex; align-items: center; border: 1px solid #ceead6; vertical-align: middle;">
+                            ✓ {% trans "Purchased" %}
+                        </span>
+                        {% endif %}
+                    </td>
+                    <td style="padding: 10px; color: {% if music.is_purchased %}#5f6368{% else %}inherit{% endif %};">{{ music.artist }}</td>
+                    <td style="padding: 10px; color: {% if music.is_purchased %}#5f6368{% else %}inherit{% endif %};">{{ music.price }} 🌰 {% trans "Dotori" %}</td>
+                    <td style="padding: 10px;">
+                        {% if music.is_purchased %}
+                        <span style="font-size: 13px; color: #137333; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; padding: 4px 0;">
+                            ✓ {% trans "Purchased" %}
+                        </span>
+                        {% else %}
+                        <a href="{% url 'shop:buy_music' music.id %}" class="btn btn-primary btn-sm">{% trans "Buy" %}</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" style="padding: 20px; text-align: center;">{% trans "No music available." %}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

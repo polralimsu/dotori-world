@@ -1,0 +1,13 @@
+{% load i18n %}{% autoescape off %}
+{% trans "Hello" %} {{ user.nickname }},
+
+{% trans "Thank you for signing up for DOTORi World." %}
+{% trans "Please click the link below to activate your account:" %}
+
+{{ protocol }}://{{ domain }}{% url 'accounts:activate' uidb64=uid token=token %}
+
+{% trans "If you did not sign up, please ignore this email." %}
+
+{% trans "Thank you," %}
+DOTORi World
+{% endautoescape %}

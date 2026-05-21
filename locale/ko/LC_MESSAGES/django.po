@@ -1,0 +1,357 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: you@example.com\n"
+"POT-Creation-Date: 2026-05-19 00:00+0900\n"
+"PO-Revision-Date: 2026-05-19 00:00+0900\n"
+"Last-Translator: you <you@example.com>\n"
+"Language-Team: ko <yourteam@example.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "My Minihompi"
+msgstr "내 미니홈피"
+
+msgid "Shop"
+msgstr "상점"
+
+msgid "Logout"
+msgstr "로그아웃"
+
+msgid "Login"
+msgstr "로그인"
+
+msgid "Sign Up"
+msgstr "회원가입"
+
+msgid "Dotori"
+msgstr "도토리"
+
+msgid "Minihompi Services"
+msgstr "미니홈피 서비스"
+
+msgid "Dashboard"
+msgstr "대시보드"
+
+msgid "Pado-taki (Random)"
+msgstr "파도타기 (랜덤)"
+
+msgid "Friends List"
+msgstr "친구 목록"
+
+msgid "Login to use"
+msgstr "로그인 후 이용 가능"
+
+msgid "Sign In"
+msgstr "로그인"
+
+msgid "Username"
+msgstr "아이디"
+
+msgid "Password"
+msgstr "비밀번호"
+
+msgid "Invalid username or password."
+msgstr "아이디 또는 비밀번호가 잘못되었습니다."
+
+msgid "New to DOTORi World?"
+msgstr "도토리 월드가 처음이신가요?"
+
+msgid "Create an account"
+msgstr "계정 만들기"
+
+msgid "Create Account"
+msgstr "회원가입"
+
+msgid "Already have an account?"
+msgstr "이미 계정이 있으신가요?"
+
+msgid "Minihompi"
+msgstr "미니홈피"
+
+msgid "No Image"
+msgstr "사진 없음"
+
+msgid "Main Video"
+msgstr "메인 동영상"
+
+msgid "Posts"
+msgstr "게시글"
+
+msgid "Write Post"
+msgstr "글쓰기"
+
+msgid "No posts yet."
+msgstr "아직 게시글이 없습니다."
+
+msgid "BGM Player"
+msgstr "BGM 플레이어"
+
+msgid "Browser autoplay blocked. Please click play manually."
+msgstr "브라우저 자동재생이 차단되었습니다. 수동으로 재생해주세요."
+
+msgid "No BGM selected."
+msgstr "선택된 BGM이 없습니다."
+
+msgid "My Dotori:"
+msgstr "내 도토리:"
+
+msgid "Charge Dotori"
+msgstr "도토리 충전"
+
+msgid "Music Store"
+msgstr "음악 상점"
+
+msgid "Title"
+msgstr "제목"
+
+msgid "Artist"
+msgstr "가수"
+
+msgid "Price"
+msgstr "가격"
+
+msgid "Action"
+msgstr "동작"
+
+msgid "Buy"
+msgstr "구매"
+
+msgid "No music available."
+msgstr "음악이 없습니다."
+
+msgid "Virtual payment system for Dotori."
+msgstr "도토리를 위한 가상 결제 시스템입니다."
+
+msgid "Amount (Dotori)"
+msgstr "수량 (도토리)"
+
+msgid "Pay"
+msgstr "결제"
+
+msgid "Visit Minihompi"
+msgstr "미니홈피 방문"
+
+msgid "You have no friends yet."
+msgstr "아직 친구가 없습니다."
+
+msgid "No Img"
+msgstr "사진 없음"
+
+msgid "Korean"
+msgstr "한국어"
+
+msgid "English"
+msgstr "영어"
+
+msgid "Japanese"
+msgstr "일본어"
+
+msgid "Successfully charged {} Dotori."
+msgstr "{} 도토리가 성공적으로 충전되었습니다."
+
+msgid "Failed confirming payment."
+msgstr "결제를 확정하지 못 하였습니다."
+
+msgid "Failed payment."
+msgstr "결제 실패"
+
+msgid "Successfully purchased music: {}"
+msgstr "음악 구매 완료: {}"
+
+msgid "You already own this music."
+msgstr "이미 보유한 음악입니다."
+
+msgid "Not enough Dotori."
+msgstr "도토리가 부족합니다."
+
+msgid "Edit Profile"
+msgstr "프로필 수정"
+
+msgid "Save"
+msgstr "저장"
+
+msgid "Upload"
+msgstr "업로드"
+
+msgid "Profile updated successfully."
+msgstr "프로필이 성공적으로 업데이트되었습니다."
+
+msgid "Post uploaded successfully."
+msgstr "게시글이 성공적으로 업로드되었습니다."
+
+msgid "Translate"
+msgstr "번역하기"
+
+msgid "Ilchon-pyeong (Friend's Note)"
+msgstr "일촌평"
+
+msgid "Leave a one-line message..."
+msgstr "일촌평을 남겨주세요..."
+
+msgid "Write"
+msgstr "작성"
+
+msgid "No Ilchon-pyeong yet."
+msgstr "아직 작성된 일촌평이 없습니다."
+
+msgid "Write a comment..."
+msgstr "댓글을 남겨주세요..."
+
+msgid "Comment"
+msgstr "댓글"
+
+msgid "Ilchon-pyeong saved."
+msgstr "일촌평이 저장되었습니다."
+
+msgid "Delete"
+msgstr "삭제"
+
+msgid "Are you sure you want to delete this?"
+msgstr "정말 삭제하시겠습니까?"
+
+msgid "Post deleted."
+msgstr "게시글이 삭제되었습니다."
+
+msgid "Comment deleted."
+msgstr "댓글이 삭제되었습니다."
+
+msgid "Ilchon-pyeong deleted."
+msgstr "일촌평이 삭제되었습니다."
+
+msgid "Search user..."
+msgstr "사용자 검색..."
+
+msgid "Search Results for"
+msgstr "검색 결과:"
+
+msgid "No users found."
+msgstr "사용자를 찾을 수 없습니다."
+
+msgid "Friend"
+msgstr "일촌"
+
+msgid "Pending Request"
+msgstr "신청 대기 중"
+
+msgid "Request Friendship"
+msgstr "일촌 맺기"
+
+msgid "Friend request sent."
+msgstr "일촌 신청을 보냈습니다."
+
+msgid "Pending Requests"
+msgstr "받은 일촌 신청"
+
+msgid "Accept"
+msgstr "수락"
+
+msgid "Decline"
+msgstr "거절"
+
+msgid "Friend request accepted."
+msgstr "일촌 신청을 수락했습니다."
+
+msgid "Friend request rejected."
+msgstr "일촌 신청을 거절했습니다."
+
+msgid "No pending requests."
+msgstr "대기 중인 신청이 없습니다."
+
+msgid "Email"
+msgstr "이메일"
+
+msgid "Please check your email to activate your account."
+msgstr "계정을 활성화하려면 이메일을 확인해주세요."
+
+msgid "Your account has been activated."
+msgstr "계정이 활성화되었습니다."
+
+msgid "Activation link is invalid!"
+msgstr "활성화 링크가 유효하지 않습니다!"
+
+msgid "DOTORi World - Verify your email"
+msgstr "DOTORi World - 이메일 인증"
+
+msgid "Hello"
+msgstr "안녕하세요"
+
+msgid "Thank you for signing up for DOTORi World."
+msgstr "DOTORi World에 가입해주셔서 감사합니다."
+
+msgid "Please click the link below to activate your account:"
+msgstr "아래 링크를 클릭하여 계정을 활성화하세요:"
+
+msgid "If you did not sign up, please ignore this email."
+msgstr "가입하지 않으셨다면 이 이메일을 무시해주세요."
+
+msgid "Thank you,"
+msgstr "감사합니다,"
+
+msgid "Find Username"
+msgstr "아이디 찾기"
+
+msgid "Enter your email address to find your username."
+msgstr "아이디를 찾으려면 이메일 주소를 입력하세요."
+
+msgid "Your username is: %(username)s"
+msgstr "회원님의 아이디는: %(username)s"
+
+msgid "No account found with that email address."
+msgstr "해당 이메일로 등록된 계정이 없습니다."
+
+msgid "Back to login"
+msgstr "로그인으로 돌아가기"
+
+msgid "Password Reset"
+msgstr "비밀번호 재설정"
+
+msgid "Reset Password"
+msgstr "비밀번호 찾기"
+
+msgid ""
+"Enter your email address and we will send you a link to reset your password."
+msgstr "이메일 주소를 입력하면 비밀번호 재설정 링크를 보내드립니다."
+
+msgid "Send Reset Link"
+msgstr "재설정 링크 보내기"
+
+msgid ""
+"A password reset link has been sent to your email address. Please check your"
+" inbox."
+msgstr "비밀번호 재설정 링크가 이메일로 발송되었습니다. 받은 편지함을 확인해주세요."
+
+msgid "Set New Password"
+msgstr "새 비밀번호 설정"
+
+msgid "Change Password"
+msgstr "비밀번호 변경"
+
+msgid ""
+"This password reset link is invalid or has expired. Please request a new "
+"one."
+msgstr "이 비밀번호 재설정 링크는 유효하지 않거나 만료되었습니다. 새로 요청해주세요."
+
+msgid "Request new link"
+msgstr "새 링크 요청"
+
+msgid "Password Reset Complete"
+msgstr "비밀번호 재설정 완료"
+
+msgid ""
+"Your password has been successfully changed. You can now log in with your "
+"new password."
+msgstr "비밀번호가 성공적으로 변경되었습니다. 새 비밀번호로 로그인할 수 있습니다."
+
+msgid ""
+"You are receiving this email because a password reset was requested for your"
+" DOTORi World account."
+msgstr "DOTORi World 계정의 비밀번호 재설정이 요청되어 이 이메일을 보내드립니다."
+
+msgid "Please click the link below to set a new password:"
+msgstr "아래 링크를 클릭하여 새 비밀번호를 설정하세요:"
+
+msgid "If you did not request a password reset, please ignore this email."
+msgstr "비밀번호 재설정을 요청하지 않으셨다면 이 이메일을 무시해주세요."

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Search Users" %} - DOTORi World{% endblock %}
+
+{% block content %}
+<div class="aws-card" style="max-width: 800px; margin: 20px auto;">
+    <div class="aws-card-header">
+        <h2>{% trans "Search Results for" %} "{{ query }}"</h2>
+    </div>
+    <div class="aws-card-body">
+        <ul style="list-style: none; padding: 0;">
+            {% for u in users %}
+            <li style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--aws-border); padding: 10px 0;">
+                <div>
+                    <strong>{{ u.nickname }}</strong> ({{ u.username }})
+                </div>
+                <a href="{% url 'minihompi:index' u.username %}" class="btn btn-primary btn-sm">{% trans "Visit Minihompi" %}</a>
+            </li>
+            {% empty %}
+            <li>{% trans "No users found." %}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

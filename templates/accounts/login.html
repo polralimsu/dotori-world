@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Login" %} - DOTORi World{% endblock %}
+
+{% block sidebar %}
+<!-- Hide sidebar on login page -->
+{% endblock %}
+
+{% block content %}
+<div class="aws-card" style="max-width: 400px; margin: 40px auto;">
+    <div class="aws-card-header">
+        <h2>{% trans "Sign In" %}</h2>
+    </div>
+    <div class="aws-card-body">
+        <form method="post">
+            {% csrf_token %}
+            {% if form.errors %}
+                <div class="alert" style="color: red; margin-bottom: 10px;">
+                    {% trans "Invalid username or password." %}
+                </div>
+            {% endif %}
+            
+            <div class="form-group">
+                <label for="id_username">{% trans "Username" %}</label>
+                <input type="text" name="username" class="form-control" id="id_username" required autofocus>
+            </div>
+            
+            <div class="form-group">
+                <label for="id_password">{% trans "Password" %}</label>
+                <input type="password" name="password" class="form-control" id="id_password" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%;">{% trans "Sign In" %}</button>
+        </form>
+        <div style="margin-top: 16px; text-align: center; font-size: 13px;">
+            {% trans "New to DOTORi World?" %} <a href="{% url 'accounts:signup' %}">{% trans "Create an account" %}</a>
+        </div>
+        <div style="margin-top: 8px; text-align: center; font-size: 13px;">
+            <a href="{% url 'accounts:find_username' %}">{% trans "Find Username" %}</a> | <a href="{% url 'accounts:password_reset' %}">{% trans "Reset Password" %}</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

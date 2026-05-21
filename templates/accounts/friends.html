@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Friends List" %} - DOTORi World{% endblock %}
+
+{% block content %}
+<div class="aws-card" style="max-width: 800px; margin: 20px auto;">
+    <div class="aws-card-header">
+        <h2>{% trans "Pending Requests" %}</h2>
+    </div>
+    <div class="aws-card-body">
+        <ul style="list-style: none; padding: 0;">
+            {% for req in pending_requests %}
+            <li style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--aws-border); padding: 10px 0;">
+                <div>
+                    <strong>{{ req.from_user.nickname }}</strong> ({{ req.from_user.username }})
+                </div>
+                <div style="display: flex; gap: 5px;">
+                    <form action="{% url 'accounts:accept_friend_request' req.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary btn-sm">{% trans "Accept" %}</button>
+                    </form>
+                    <form action="{% url 'accounts:reject_friend_request' req.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline-light btn-sm" style="color: red; border: 1px solid red;">{% trans "Decline" %}</button>
+                    </form>
+                </div>
+            </li>
+            {% empty %}
+            <li>{% trans "No pending requests." %}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<div class="aws-card" style="max-width: 800px; margin: 20px auto;">
+    <div class="aws-card-header">
+        <h2>{% trans "Friends List" %}</h2>
+    </div>
+    <div class="aws-card-body">
+        <ul style="list-style: none; padding: 0;">
+            {% for f in friends %}
+            <li style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--aws-border); padding: 10px 0;">
+                <div>
+                    <strong>{{ f.nickname }}</strong> ({{ f.username }})
+                </div>
+                <a href="{% url 'minihompi:index' f.username %}" class="btn btn-primary btn-sm">{% trans "Visit Minihompi" %}</a>
+            </li>
+            {% empty %}
+            <li>{% trans "You have no friends yet." %}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

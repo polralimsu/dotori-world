@@ -1,0 +1,60 @@
+name: Multi-Region ASG Instance Refresh
+
+on:
+  workflow_dispatch:
+#  push:
+#    branches:
+#      - master
+
+permissions:
+  id-token: write # GitHub OIDC(OpenID Connect)를 사용하여 AWS Role을 Assume할 때 필수적입니다.
+  contents: read  # 저장소 코드를 읽기 위해 필요합니다.
+
+jobs:
+  deploy-refresh:
+    name: Trigger Instance Refresh
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. 소스 코드 체크아웃
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # 2. AWS 인증 설정
+      # OIDC 방식(Role Assume)과 기존 Access Key 방식 둘 다 지원합니다.
+      # GitHub Repository Secrets에 해당하는 보안 키들을 채워주셔야 작동합니다.
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          # 방법 A: OIDC 방식 (권장 - 보안상 가장 안전합니다)
+          # AWS IAM에서 OIDC Identity Provider를 구성한 후 생성한 Role ARN을 Secret에 지정합니다.
+          # role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          
+          # 방법 B: AWS Access Keys 방식 (간단한 설정용)
+          # OIDC를 사용하지 않는다면 아래 두 Secrets를 설정합니다.
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          
+          aws-region: ap-northeast-2 # 기본 인증용 리전 (임의 설정 가능)
+
+      - name: Trigger Refresh in ap-northeast-2
+        if: env.ASG_NAME_SEOUL != ''
+        env:
+          ASG_NAME_SEOUL: ${{ secrets.ASG_NAME_SEOUL }}
+        run: |
+          echo "Starting Instance Refresh for ASG in ap-northeast-2 (Seoul): $ASG_NAME_SEOUL"
+          aws autoscaling start-instance-refresh \
+            --auto-scaling-group-name "$ASG_NAME_SEOUL" \
+            --region ap-northeast-2 \
+            --strategy Rolling
+
+      - name: Trigger Refresh in ap-northeast-1
+        if: env.ASG_NAME_TOKYO != ''
+        env:
+          ASG_NAME_TOKYO: ${{ secrets.ASG_NAME_TOKYO }}
+        run: |
+          echo "Starting Instance Refresh for ASG in ap-northeast-1 (Tokyo): $ASG_NAME_TOKYO"
+          aws autoscaling start-instance-refresh \
+            --auto-scaling-group-name "$ASG_NAME_TOKYO" \
+            --region ap-northeast-1 \
+            --strategy Rolling

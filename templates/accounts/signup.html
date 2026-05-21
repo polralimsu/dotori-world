@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Sign Up" %} - DOTORi World{% endblock %}
+
+{% block sidebar %}
+<!-- Hide sidebar on signup page -->
+{% endblock %}
+
+{% block content %}
+<div class="aws-card" style="max-width: 400px; margin: 40px auto;">
+    <div class="aws-card-header">
+        <h2>{% trans "Create Account" %}</h2>
+    </div>
+    <div class="aws-card-body">
+        <form method="post">
+            {% csrf_token %}
+            
+            {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.help_text %}
+                    <small style="color: #666; font-size: 12px; display: block; margin-top: 4px;">{{ field.help_text }}</small>
+                {% endif %}
+                {% for error in field.errors %}
+                    <div style="color: red; font-size: 12px; margin-top: 4px;">{{ error }}</div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">{% trans "Sign Up" %}</button>
+        </form>
+        <div style="margin-top: 16px; text-align: center; font-size: 13px;">
+            {% trans "Already have an account?" %} <a href="{% url 'accounts:login' %}">{% trans "Sign In" %}</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

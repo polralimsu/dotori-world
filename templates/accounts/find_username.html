@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Find Username" %} - DOTORi World{% endblock %}
+
+{% block sidebar %}
+<!-- Hide sidebar -->
+{% endblock %}
+
+{% block content %}
+<div class="aws-card" style="max-width: 400px; margin: 40px auto;">
+    <div class="aws-card-header">
+        <h2>{% trans "Find Username" %}</h2>
+    </div>
+    <div class="aws-card-body">
+        <p style="font-size: 13px; color: #666; margin-bottom: 16px;">{% trans "Enter your email address to find your username." %}</p>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_email">{% trans "Email" %}</label>
+                <input type="email" name="email" class="form-control" id="id_email" required autofocus>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">{% trans "Find Username" %}</button>
+        </form>
+        <div style="margin-top: 16px; text-align: center; font-size: 13px;">
+            <a href="{% url 'accounts:login' %}">{% trans "Back to login" %}</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
