@@ -16,7 +16,7 @@ pip install -r requirements.txt
 #TOSS_CLIENT_KEY
 #TOSS_SECRET_KEY
 #TOSS_SECURITY_KEY
-#DJANGO_SECRET_KEY
+#DJANGO_SECRET_KEY <- python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'
 #DB_USER
 #DB_PASSWORD
 #DB_HOST
