@@ -3,9 +3,7 @@
 # wget https://github.com/polralimsu/dotori-world/raw/refs/heads/master/launch.sh
 # sudo -u ec2-user bash $PWD/launch.sh
 
-# CREATE DATABASE dotori_db;
-# USE dotori_db;
-# CREATE TABLE mg_lock(id CHAR(50) PRIMARY KEY);
+# rm */migrations/0*_*.py
 
 cd $HOME
 sudo dnf install -y git python3.14-devel mariadb114-devel gcc
@@ -52,6 +50,7 @@ from django.db import connection
 upd = True
 
 with connection.cursor() as cursor:
+    cursor.execute("CREATE TABLE IF NOT EXISTS mg_lock(id CHAR(40) PRIMARY KEY)")
     cursor.execute("LOCK TABLE mg_lock WRITE")
     try:
         cursor.execute("SELECT id FROM mg_lock WHERE id = \"$COMMIT_HEAD\"")
