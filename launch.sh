@@ -63,7 +63,7 @@ with connection.cursor() as cursor:
         cursor.execute("UNLOCK TABLES")
 
 if upd:
-    call_command('makemigrations')
+    call_command('makemigrations', '--no-input')
     call_command('migrate')
     call_command('collectstatic', '--no-input')
     print('migration done')

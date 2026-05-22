@@ -201,7 +201,7 @@
                         {{ hompi_user.bgm.title }} - {{ hompi_user.bgm.artist }}
                     </div>
                     <audio id="bgm-player" controls autoplay loop style="width: 100%;">
-                        <source src="{{ hompi_user.bgm.file_url }}" type="audio/mpeg">
+                        <source src="{{ hompi_user.bgm.file.url }}" type="audio/mpeg">
                     </audio>
                     <div id="autoplay-error" class="alert alert-warning" style="display: none; font-size: 12px; margin-top: 10px; padding: 10px; border: 1px solid #d5dbdb;">
                         {% trans "Browser autoplay blocked. Please click play manually." %}

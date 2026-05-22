@@ -5,7 +5,7 @@ from django.conf import settings
 class Music(models.Model):
     title = models.CharField(max_length=200)
     artist = models.CharField(max_length=200)
-    file_url = models.URLField()
+    file = models.FileField(upload_to='music/')
     price = models.PositiveIntegerField(default=10) # 도토리 가격
 
     def __str__(self):
