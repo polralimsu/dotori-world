@@ -1,5 +1,13 @@
 #!/bin/bash
-cd /root
+
+# wget https://github.com/polralimsu/dotori-world/raw/refs/heads/master/launch.sh
+# sudo -u ec2-user bash $PWD/launch.sh
+
+# CREATE DATABASE dotori_db;
+# USE dotori_db;
+# CREATE TABLE mg_lock(id CHAR(50) PRIMARY KEY);
+
+cd $HOME
 sudo dnf install -y git python3.14-devel mariadb114-devel gcc
 git clone https://github.com/polralimsu/dotori-world.git
 cd dotori-world
@@ -33,23 +41,49 @@ EOF
 
 chmod 700 .env
 
+COMMIT_HEAD=$(git rev-parse HEAD)
+
 python create_translations.py
 
-if false; then
-python manage.py migrate
-python manage.py collectstatic --noinput
-fi
+python manage.py shell << EOF
+from django.core.management import call_command
+from django.db import connection
+
+upd = True
+
+with connection.cursor() as cursor:
+    cursor.execute("LOCK TABLE mg_lock WRITE")
+    try:
+        cursor.execute("SELECT id FROM mg_lock WHERE id = \"$COMMIT_HEAD\"")
+        rows = [row[0] for row in cursor.fetchall()]
+        upd = "$COMMIT_HEAD" not in rows
+        cursor.execute("DELETE FROM mg_lock")
+        cursor.execute("INSERT INTO mg_lock VALUES (\"$COMMIT_HEAD\")")
+    finally:
+        cursor.execute("UNLOCK TABLES")
+
+if upd:
+    call_command('makemigrations')
+    call_command('migrate')
+    call_command('collectstatic', '--no-input')
+    print('migration done')
+else:
+    print('no migration')
+
+EOF
 
 pip install gunicorn
 
-cat > /etc/systemd/system/gunicorn.service <<EOF
+cat <<EOF | sudo tee /etc/systemd/system/gunicorn.service
 [Unit]
 Description=gunicorn daemon for Django Project
 After=network.target
 
 [Service]
-WorkingDirectory=/root/dotori-world
-ExecStart=/root/dotori-world/venv/bin/gunicorn \
+User=ec2-user
+Group=ec2-user
+WorkingDirectory=$PWD
+ExecStart=$PWD/venv/bin/gunicorn \
           --access-logfile - \
           --workers 3 \
           --bind 0.0.0.0:8000 \
@@ -59,6 +93,6 @@ ExecStart=/root/dotori-world/venv/bin/gunicorn \
 WantedBy=multi-user.target
 EOF
 
-systemctl daemon-reload
-systemctl enable gunicorn
-systemctl start gunicorn
+sudo systemctl daemon-reload
+sudo systemctl enable gunicorn
+sudo systemctl start gunicorn
