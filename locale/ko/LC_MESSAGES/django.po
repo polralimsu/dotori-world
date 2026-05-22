@@ -355,3 +355,6 @@ msgstr "아래 링크를 클릭하여 새 비밀번호를 설정하세요:"
 
 msgid "If you did not request a password reset, please ignore this email."
 msgstr "비밀번호 재설정을 요청하지 않으셨다면 이 이메일을 무시해주세요."
+
+msgid "Purchased"
+msgstr "구매 완료"

@@ -10,13 +10,14 @@ from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
 from django.http import HttpResponse
 
+@login_required
 def index(request):
     musics = Music.objects.all()
-    if request.user.is_authenticated:
-        from django.db.models import Exists, OuterRef
-        purchased = UserMusic.objects.filter(user=request.user, music=OuterRef('pk'))
-        musics = musics.annotate(is_purchased=Exists(purchased))
+    from django.db.models import Exists, OuterRef
+    purchased = UserMusic.objects.filter(user=request.user, music=OuterRef('pk'))
+    musics = musics.annotate(is_purchased=Exists(purchased))
     return render(request, 'shop/index.html', {'musics': musics})
+
 
 @login_required
 def buy_music(request, music_id):
