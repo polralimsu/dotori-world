@@ -108,9 +108,9 @@ LANGUAGE_CODE = 'ko'
 from django.utils.translation import gettext_lazy as _
 
 LANGUAGES = [
-    ('ko', _('Korean')),
-    ('en', _('English')),
-    ('ja', _('Japanese')),
+    ('ko', '한국어'),
+    ('en', 'English'),
+    ('ja', '日本語'),
 ]
 
 LOCALE_PATHS = [

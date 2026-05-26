@@ -88,7 +88,6 @@ ExecStart=$PWD/venv/bin/gunicorn \
           --access-logfile - \
           --workers 3 \
           --bind 0.0.0.0:8000 \
-          --forwarded-allow-ips='*' \
           config.wsgi:application
 
 [Install]
