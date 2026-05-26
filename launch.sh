@@ -24,6 +24,7 @@ pip install -r requirements.txt
 #AWS_S3_CUSTOM_DOMAIN
 #MY_DOMAIN
 
+# use parameter store
 echo "DB_HOST=$(aws secretsmanager get-secret-value --secret-id dotori-idc-db-host --output text --query SecretString --region ap-northeast-2)" >> .env
 IFS= aws secretsmanager get-secret-value --secret-id dotori-secrets --output text --query SecretString --region ap-northeast-2 | jq -r 'to_entries[] | "\(.key) \(.value)"' | while read -r key value; do echo "$key=\"$value\"" >> .env; done
 source .env
@@ -87,6 +88,7 @@ ExecStart=$PWD/venv/bin/gunicorn \
           --access-logfile - \
           --workers 3 \
           --bind 0.0.0.0:8000 \
+          --forwarded-allow-ips='*' \
           config.wsgi:application
 
 [Install]
