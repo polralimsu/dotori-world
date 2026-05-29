@@ -19,14 +19,13 @@ pip install -r requirements.txt
 #DJANGO_SECRET_KEY <- python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
 #DB_USER
 #DB_PASSWORD
-#DB_HOST
 #AWS_STORAGE_BUCKET_NAME
 #AWS_S3_CUSTOM_DOMAIN
 #MY_DOMAIN
 
 # use parameter store
 echo "DB_HOST=$(aws secretsmanager get-secret-value --secret-id dotori-idc-db-host --output text --query SecretString --region ap-northeast-2)" >> .env
-IFS= aws secretsmanager get-secret-value --secret-id dotori-secrets-1 --output text --query SecretString --region ap-northeast-2 | jq -r 'to_entries[] | "\(.key) \(.value)"' | while read -r key value; do echo "$key=\"$value\"" >> .env; done
+IFS= aws secretsmanager get-secret-value --secret-id dotori-secrets-2 --output text --query SecretString --region ap-northeast-2 | jq -r 'to_entries[] | "\(.key) \(.value)"' | while read -r key value; do echo "$key=\"$value\"" >> .env; done
 source .env
 
 cat >> .env <<EOF
