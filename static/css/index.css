@@ -219,7 +219,7 @@ a:hover {
 /* Tabs column sticking out of the right side */
 .cy-tabs {
     position: absolute;
-    right: -52px;
+    right: -72px;
     top: 50px;
     display: flex;
     flex-direction: column;
@@ -228,7 +228,7 @@ a:hover {
 }
 
 .cy-tab {
-    width: 52px;
+    width: 72px;
     height: 38px;
     background: var(--cy-accent);
     color: #fff;
@@ -248,14 +248,14 @@ a:hover {
 .cy-tab.active {
     background: #ffffff;
     color: var(--cy-outer-bg);
-    width: 56px;
+    width: 76px;
     border-right: 1px solid var(--cy-border-color);
     box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
 }
 
 .cy-tab:hover:not(.active) {
     background: var(--cy-primary);
-    width: 55px;
+    width: 75px;
 }
 
 /* Button & UI elements styling */
