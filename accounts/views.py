@@ -132,8 +132,14 @@ def profile_edit(request):
     if request.method == 'POST':
         form = ProfileEditForm(request.POST, request.FILES, instance=request.user, user=request.user)
         if form.is_valid():
+            bgm_changed = 'bgm' in form.changed_data
             form.save()
             messages.success(request, _('Profile updated successfully.'))
+            if bgm_changed:
+                from django.urls import reverse
+                from django.http import HttpResponse
+                redirect_url = reverse('minihompi:index', kwargs={'username': request.user.username})
+                return HttpResponse(f'<script>window.parent.location.href = "{redirect_url}";</script>')
             return redirect('minihompi:index', username=request.user.username)
     else:
         form = ProfileEditForm(instance=request.user, user=request.user)
