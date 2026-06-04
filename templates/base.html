@@ -201,12 +201,12 @@
                 <a href="{% url 'minihompi:index' current_hompi_user.username %}"
                     class="cy-tab {% if '/hompi/' in request.path and '/posts/write/' not in request.path %}active{% endif %}"
                     target="minihp-iframe">
-                    {% trans "Home" %}
+                    🏘️ {% trans "Home" %}
                 </a>
                 {% else %}
                 <a href="/" class="cy-tab {% if request.path == '/' %}active{% endif %}"
                     target="minihp-iframe">
-                    {% trans "Home" %}
+                    🏘️ {% trans "Home" %}
                 </a>
                 {% endif %}
 
