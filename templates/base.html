@@ -1,107 +1,239 @@
 {% load i18n static %}
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}DOTORi World{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/index.css' %}?v=2">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}?v=3">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
     {% block extra_head %}{% endblock %}
 </head>
+
 <body>
-    <header class="aws-nav">
-        <div class="nav-left">
-            <a href="/" class="logo">
-                <span class="logo-icon">🐿️</span>
-                <span class="logo-text">DOTORi World</span>
-            </a>
-            <div class="nav-menu">
-                {% if user.is_authenticated %}
-                <a href="{% url 'minihompi:index' user.username %}" class="nav-item">{% trans "My Minihompi" %}</a>
-                <a href="{% url 'shop:index' %}" class="nav-item">{% trans "Shop" %}</a>
-                {% endif %}
-            </div>
-        </div>
-        
-        <div class="nav-center" style="flex: 1; display: flex; justify-content: center; padding: 0 20px;">
-            {% if user.is_authenticated %}
-            <form action="{% url 'accounts:search_users' %}" method="get" style="display: flex; gap: 5px; width: 100%; max-width: 400px;">
-                <input type="text" name="q" placeholder="{% trans 'Search user...' %}" class="form-control" style="font-size: 13px; padding: 4px 12px; border-radius: 4px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; width: 100%;">
-                <button type="submit" class="btn btn-outline-light btn-sm" style="border:none; padding: 4px 8px;">🔍</button>
-            </form>
-            {% endif %}
-        </div>
-        
-        <div class="nav-right">
-            <!-- Actions -->
-            <div style="display: flex; align-items: center;">
-                
-                <form action="{% url 'set_language' %}" method="post" style="display: inline-block; margin-right: 15px;">
-                {% csrf_token %}
-                <input name="next" type="hidden" value="{{ request.get_full_path }}">
-                <select name="language" onchange="this.form.submit()" class="lang-select">
-                    {% get_current_language as LANGUAGE_CODE %}
-                    {% get_available_languages as LANGUAGES %}
-                    {% for lang in LANGUAGES %}
-                        <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %}selected{% endif %}>
-                            {{ lang.1 }}
-                        </option>
-                    {% endfor %}
-                </select>
-            </form>
-            {% if user.is_authenticated %}
-                <span class="nav-user" style="margin-right: 15px;">{{ user.nickname }} (🌰 {% trans "Dotori" %}: {{ user.dotori_balance }})</span>
-                <form action="{% url 'accounts:logout' %}" method="post" style="display:inline;">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-outline-light btn-sm">{% trans "Logout" %}</button>
-                </form>
-            {% else %}
-                <a href="{% url 'accounts:login' %}" class="btn btn-outline-light btn-sm">{% trans "Login" %}</a>
-                <a href="{% url 'accounts:signup' %}" class="btn btn-primary btn-sm">{% trans "Sign Up" %}</a>
-            {% endif %}
-        </div>
-    </header>
+    {% with current_hompi_user=hompi_user|default:user %}
 
-    <div class="aws-layout">
-        {% block sidebar %}
-        <aside class="aws-sidebar">
-            <nav class="sidebar-nav">
-                <div class="sidebar-group">
-                    <div class="sidebar-title">{% trans "Minihompi Services" %}</div>
-                    {% if user.is_authenticated %}
-                    <a href="{% url 'minihompi:index' user.username %}" class="sidebar-link">{% trans "Dashboard" %}</a>
-                    <a href="{% url 'minihompi:pado_taki' %}" class="sidebar-link">{% trans "Pado-taki (Random)" %}</a>
-                    <a href="{% url 'accounts:friends' %}" class="sidebar-link">{% trans "Friends List" %}</a>
-                    {% else %}
-                    <a href="{% url 'accounts:login' %}" class="sidebar-link">{% trans "Login to use" %}</a>
+    <!-- Cyworld Main Frame Wrapper -->
+    <div class="cy-wrapper">
+        <div class="cy-container">
+
+            <!-- Topbar (Utility bar) -->
+            <header class="cy-topbar">
+                <a href="/" class="cy-title">
+                    <span>🐿️</span>
+                    <span style="font-family: 'Share Tech Mono', monospace; letter-spacing: -0.5px;">DOTORi World</span>
+                    {% if current_hompi_user %}
+                    <span style="font-size: 13px; color: var(--cy-text-light); font-weight: normal; margin-left: 5px;">
+                        ({{ current_hompi_user.nickname }}'s Minihp)
+                    </span>
                     {% endif %}
-                </div>
-            </nav>
-        </aside>
-        {% endblock %}
+                </a>
 
-        <main class="aws-main">
-            <div class="aws-content">
-                {% if messages %}
-                <div class="messages">
-                    {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }}" style="padding: 10px; margin-bottom: 10px; border-radius: 2px; border: 1px solid #d5dbdb; background: #fff;">
-                        {{ message }}
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <!-- User Search Form -->
+                    {% if user.is_authenticated %}
+                    <form action="{% url 'accounts:search_users' %}" method="get" class="cy-search-form">
+                        <input type="text" name="q" placeholder="{% trans 'Search user...' %}"
+                            class="form-control cy-search-input" style="width: 150px; padding: 2px 8px; height: 26px;">
+                        <button type="submit" class="btn btn-sm" style="height: 26px; padding: 0 8px;">🔍</button>
+                    </form>
+                    {% endif %}
+
+                    <!-- Language selector -->
+                    <form action="{% url 'set_language' %}" method="post" style="display: inline-block; margin: 0;">
+                        {% csrf_token %}
+                        <input name="next" type="hidden" value="{{ request.get_full_path }}">
+                        <select name="language" onchange="this.form.submit()" class="lang-select">
+                            {% get_current_language as CURRENT_LANG %}
+                            {% get_available_languages as LANGUAGES %}
+                            {% for lang in LANGUAGES %}
+                            <option value="{{ lang.0 }}" {% if lang.0 == CURRENT_LANG %}selected{% endif %}>
+                                {{ lang.1 }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </form>
+
+                    <!-- Auth info and actions -->
+                    <div style="font-size: 12px; display: flex; align-items: center; gap: 10px;">
+                        {% if user.is_authenticated %}
+                        <span><strong>{{ user.nickname }}</strong> (🌰 {{ user.dotori_balance }})</span>
+                        <form action="{% url 'accounts:logout' %}" method="post" style="display:inline; margin:0;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-outline-light"
+                                style="padding: 2px 8px; height: 26px;">{% trans "Logout" %}</button>
+                        </form>
+                        {% else %}
+                        <a href="{% url 'accounts:login' %}" class="btn btn-sm btn-outline-light"
+                            style="height: 26px; padding: 2px 8px;">{% trans "Login" %}</a>
+                        <a href="{% url 'accounts:signup' %}" class="btn btn-sm btn-primary"
+                            style="height: 26px; padding: 2px 8px;">{% trans "Sign Up" %}</a>
+                        {% endif %}
                     </div>
-                    {% endfor %}
                 </div>
+            </header>
+
+            <!-- Main Content Layout -->
+            <div class="cy-layout">
+
+                <!-- Left Profile Column -->
+                {% if user.is_authenticated %}
+                <aside class="cy-left-col">
+                    <!-- Today / Total visitors -->
+                    <div class="cy-stats">
+                        TODAY <span class="today">{{ current_hompi_user.today_views|default:0 }}</span> | TOTAL <span class="total">{{ current_hompi_user.total_views|default:0 }}</span>
+                    </div>
+
+                    <!-- Profile Picture -->
+                    <div class="cy-profile-img-wrapper">
+                        {% if current_hompi_user.profile_image %}
+                        <img src="{{ current_hompi_user.profile_image.url }}" alt="Profile Photo">
+                        {% else %}
+                        <div style="font-size: 11px; color: #999; text-align: center; padding: 20px;">🐿️<br>{% trans "No Image" %}</div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Bio Text -->
+                    <div class="cy-profile-name">{{ current_hompi_user.nickname|default:"DOTORi User" }}</div>
+                    <div class="cy-profile-text">{{ current_hompi_user.profile_text|default:"반갑습니다! 도토리 월드에 오신 것을 환영해요. 🌰" }}</div>
+
+                    <!-- Friendship / Action buttons -->
+                    {% if user.is_authenticated and current_hompi_user and current_hompi_user.is_authenticated %}
+                    {% if user == current_hompi_user %}
+                    <a href="{% url 'accounts:profile_edit' %}" class="btn btn-sm btn-outline-light"
+                        style="width: 100%;">⚙️ {% trans "Edit Profile" %}</a>
+                    {% else %}
+                    {% if friendship_status == 'ACCEPTED' %}
+                    <span class="btn btn-sm"
+                        style="width: 100%; background: #e2f0d9; color: #385723; border-color: #c5e0b4; cursor: default;">🤝
+                        {% trans "Friend" %}</span>
+                    {% elif friendship_status == 'PENDING' %}
+                    <span class="btn btn-sm"
+                        style="width: 100%; background: #fff2cc; color: #7f6000; border-color: #ffe599; cursor: default;">🕒
+                        {% trans "Pending Request" %}</span>
+                    {% else %}
+                    <form action="{% url 'accounts:send_friend_request' current_hompi_user.username %}" method="post"
+                        style="width: 100%; margin:0;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm btn-primary" style="width: 100%;">💌 {% trans "Request
+                            Friendship" %}</button>
+                    </form>
+                    {% endif %}
+                    {% endif %}
+                    {% endif %}
+
+                    <!-- Pado-taki / Friends Actions -->
+                    {% if user.is_authenticated %}
+                    <div
+                        style="width: 100%; margin-top: auto; padding-top: 10px; border-top: 1px dashed var(--cy-border-color); display: flex; flex-direction: column; gap: 6px;">
+                        <a href="{% url 'minihompi:pado_taki' %}" class="btn btn-sm btn-primary" style="width: 100%;">🎲
+                            {% trans "Pado-taki (Random)" %}</a>
+                        <!-- <a href="{% url 'accounts:friends' %}" class="btn btn-sm btn-outline-light"
+                            style="width: 100%;">👥 {% trans "Friends List" %}</a> -->
+                    </div>
+                    {% endif %}
+                </aside>
                 {% endif %}
-                
-                {% block content %}
-                {% endblock %}
+
+                <!-- Center Main Content Column -->
+                <main class="cy-center-col">
+                    {% if messages %}
+                    <div class="messages">
+                        {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">
+                            {{ message }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    {% block content %}
+                    {% endblock %}
+                </main>
+
+                <!-- Right BGM Player Column -->
+                {% if user.is_authenticated %}
+                <aside class="cy-right-col">
+                    <div class="cy-bgm-box">
+                        <div
+                            style="font-size: 11px; color: var(--cy-text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px;">
+                            🍁 {% trans "Now Playing" %}</div>
+                        {% if current_hompi_user.bgm %}
+                        <div class="cy-bgm-title"
+                            title="{{ current_hompi_user.bgm.title }} - {{ current_hompi_user.bgm.artist }}">
+                            🎵 {{ current_hompi_user.bgm.title }} - {{ current_hompi_user.bgm.artist }}
+                        </div>
+                        <audio id="bgm-player" controls autoplay loop
+                            style="width: 100%; margin-top: 5px; height: 32px;">
+                            <source src="{{ current_hompi_user.bgm.file.url }}" type="audio/mpeg">
+                        </audio>
+                        <div id="autoplay-error" class="alert"
+                            style="display: none; margin-top: 8px; font-size: 10px; padding: 6px;">
+                            ⚠️ {% trans "Browser autoplay blocked. Please click play manually." %}
+                        </div>
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function () {
+                                var audio = document.getElementById('bgm-player');
+                                var playPromise = audio.play();
+
+                                if (playPromise !== undefined) {
+                                    playPromise.then(function () {
+                                        // Autoplay success
+                                    }).catch(function (error) {
+                                        document.getElementById('autoplay-error').style.display = 'block';
+                                    });
+                                }
+                            });
+                        </script>
+                        {% else %}
+                        <div class="cy-bgm-title" style="color: #999;">🍂 {% trans "No BGM selected." %}</div>
+                        {% endif %}
+                    </div>
+                </aside>
+                {% endif %}
+
+                <!-- Right Edge Vertical Folders/Tabs Navigation -->
+                <nav class="cy-tabs">
+                    {% if current_hompi_user and current_hompi_user.is_authenticated %}
+                    <a href="{% url 'minihompi:index' current_hompi_user.username %}"
+                        class="cy-tab {% if '/hompi/' in request.path and '/posts/write/' not in request.path %}active{% endif %}">
+                        {% trans "Home" %}
+                    </a>
+                    {% else %}
+                    <a href="/" class="cy-tab {% if request.path == '/' %}active{% endif %}">
+                        {% trans "Home" %}
+                    </a>
+                    {% endif %}
+
+                    {% if user.is_authenticated %}
+                    {% if current_hompi_user and user == current_hompi_user %}
+                    <a href="{% url 'posts:write' %}"
+                        class="cy-tab {% if '/posts/write/' in request.path %}active{% endif %}">
+                        ✏️ {% trans "Write" %}
+                    </a>
+                    {% endif %}
+                    <a href="{% url 'shop:index' %}" class="cy-tab {% if '/shop/' in request.path %}active{% endif %}">
+                        🌰 {% trans "Shop" %}
+                    </a>
+                    <a href="{% url 'accounts:friends' %}"
+                        class="cy-tab {% if '/friends/' in request.path %}active{% endif %}">
+                        👥 {% trans "Friends" %}
+                    </a>
+                    <!--<a href="{% url 'accounts:profile_edit' %}"
+                        class="cy-tab {% if '/profile/edit/' in request.path %}active{% endif %}">
+                        ⚙️ {% trans "Edit" %}
+                    </a>-->
+                    {% endif %}
+                </nav>
+
             </div>
-        </main>
+
+        </div>
     </div>
 
-    <script>
-        // Common scripts
-    </script>
-    {% block extra_js %}{% endblock %}
+    {% block extra_js %}{% endblock %}{% endwith %}
 </body>
+
 </html>

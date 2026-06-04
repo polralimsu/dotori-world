@@ -113,7 +113,10 @@ translations = {
         "You are receiving this email because a password reset was requested for your DOTORi World account.": "DOTORi World 계정의 비밀번호 재설정이 요청되어 이 이메일을 보내드립니다.",
         "Please click the link below to set a new password:": "아래 링크를 클릭하여 새 비밀번호를 설정하세요:",
         "If you did not request a password reset, please ignore this email.": "비밀번호 재설정을 요청하지 않으셨다면 이 이메일을 무시해주세요.",
-        "Purchased": "구매 완료"
+        "Purchased": "구매 완료",
+        "Now Playing": "현재 재생 곡",
+        "Friends": "친구",
+        "Edit": "수정"
     },
     "ja": {
         "My Minihompi": "私のミニホムピ",
@@ -226,7 +229,10 @@ translations = {
         "You are receiving this email because a password reset was requested for your DOTORi World account.": "DOTORi Worldアカウントのパスワードリセットがリクエストされたため、このメールを送信しています。",
         "Please click the link below to set a new password:": "以下のリンクをクリックして新しいパスワードを設定してください：",
         "If you did not request a password reset, please ignore this email.": "パスワードリセットをリクエストした覚えがない場合は、このメールを無視してください。",
-        "Purchased": "購入済み"
+        "Purchased": "購入済み",
+        "Now Playing": "再生中",
+        "Friends": "友達",
+        "Edit": "修正"
     }
 }
 

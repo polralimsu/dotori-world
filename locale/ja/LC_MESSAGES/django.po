@@ -140,15 +140,6 @@ msgstr "まだ友達がいません。"
 msgid "No Img"
 msgstr "画像なし"
 
-msgid "Korean"
-msgstr "韓国語"
-
-msgid "English"
-msgstr "英語"
-
-msgid "Japanese"
-msgstr "日本語"
-
 msgid "Successfully charged {} Dotori."
 msgstr "{}ドングリをチャージしました。"
 
@@ -358,3 +349,12 @@ msgstr "パスワードリセットをリクエストした覚えがない場合
 
 msgid "Purchased"
 msgstr "購入済み"
+
+msgid "Now Playing"
+msgstr "再生中"
+
+msgid "Friends"
+msgstr "友達"
+
+msgid "Edit"
+msgstr "修正"

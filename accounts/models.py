@@ -13,6 +13,9 @@ class User(AbstractUser):
     dotori_balance = models.PositiveIntegerField(default=0)
     bgm = models.ForeignKey('shop.Music', on_delete=models.SET_NULL, null=True, blank=True, related_name='+')
     is_email_verified = models.BooleanField(default=False)
+    today_views = models.PositiveIntegerField(default=0)
+    total_views = models.PositiveIntegerField(default=0)
+    last_viewed_date = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return self.username

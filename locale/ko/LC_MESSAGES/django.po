@@ -140,15 +140,6 @@ msgstr "아직 친구가 없습니다."
 msgid "No Img"
 msgstr "사진 없음"
 
-msgid "Korean"
-msgstr "한국어"
-
-msgid "English"
-msgstr "영어"
-
-msgid "Japanese"
-msgstr "일본어"
-
 msgid "Successfully charged {} Dotori."
 msgstr "{} 도토리가 성공적으로 충전되었습니다."
 
@@ -358,3 +349,12 @@ msgstr "비밀번호 재설정을 요청하지 않으셨다면 이 이메일을 
 
 msgid "Purchased"
 msgstr "구매 완료"
+
+msgid "Now Playing"
+msgstr "현재 재생 곡"
+
+msgid "Friends"
+msgstr "친구"
+
+msgid "Edit"
+msgstr "수정"

@@ -12,6 +12,23 @@ from django.utils.translation import gettext as _
 
 def index(request, username):
     hompi_user = get_object_or_404(User, username=username)
+    
+    # Increment view counter (excluding owner visiting themselves, and preventing multiple hits in same session)
+    from django.utils import timezone
+    if not (request.user.is_authenticated and request.user == hompi_user):
+        session_key = f'visited_hompi_{hompi_user.username}'
+        if not request.session.get(session_key):
+            request.session[session_key] = True
+            today = timezone.localdate()
+            if hompi_user.last_viewed_date != today:
+                hompi_user.today_views = 1
+                hompi_user.last_viewed_date = today
+                hompi_user.total_views += 1
+            else:
+                hompi_user.today_views += 1
+                hompi_user.total_views += 1
+            hompi_user.save(update_fields=['today_views', 'total_views', 'last_viewed_date'])
+
     posts = hompi_user.posts.all().prefetch_related('comments', 'comments__author')
     ilchonpyeongs = hompi_user.ilchonpyeongs.all().select_related('author')
     
