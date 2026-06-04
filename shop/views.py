@@ -36,18 +36,16 @@ def buy_music(request, music_id):
 
 @login_required
 def do_toss_payment(request):
-    return render(request, 'shop/charge.html', { 'toss_client_key': os.environ.get('TOSS_CLIENT_KEY') })
-
-@login_required
-def get_pay_id(request):
-    if request.method == 'GET':
-        amount = int(request.GET.get('amount', 10))
-        money = amount * 100;
+    if request.method == 'POST':
+        amount = request.POST.get('amount', '10')
+        money = int(amount) * 100;
         order = UserOrder.objects.create(user=request.user, amount=amount, price=money);
         order.save()
-        print('new order ', order.uuid)
-        return HttpResponse(str(order.uuid), content_type="text/plain")
-    return HttpResponse('Not proper usage', status_code=404)
+        return render(request, 'shop/pay.html', {
+            'amount': amount,
+            'uuid': order.uuid
+        })
+    return render(request, 'shop/charge.html')
 
 @login_required
 def pay_success(request):
