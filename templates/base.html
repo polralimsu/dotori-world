@@ -101,7 +101,7 @@
                 <a href="/" class="cy-title" target="_top">
                     <span>🐿️</span>
                     <span style="font-family: 'Share Tech Mono', monospace; letter-spacing: -0.5px;">DOTORi World</span>
-                    {% if current_hompi_user %}
+                    {% if current_hompi_user and current_hompi_user.is_authenticated %}
                     <span style="font-size: 13px; color: var(--cy-text-light); font-weight: normal; margin-left: 5px;">
                         ({{ current_hompi_user.nickname }}'s Minihp)
                     </span>
