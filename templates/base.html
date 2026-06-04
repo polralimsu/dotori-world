@@ -12,6 +12,7 @@
     {% block extra_head %}{% endblock %}
     <script>
         var isAuthenticated = {{ user.is_authenticated|yesno:"true,false" }};
+        var currentHompiUsername = "{{ current_hompi_user.username|default:'' }}";
         
         if (window.self === window.top) {
             document.documentElement.classList.add('is-top-level');
@@ -25,11 +26,21 @@
         } else {
             document.documentElement.classList.add('is-iframe');
             
-            // Sync parent auth state and URL
+            // Sync parent auth state, hompi owner, and URL
             try {
                 if (window.parent && typeof window.parent.isAuthenticated !== 'undefined') {
                     if (window.parent.isAuthenticated !== isAuthenticated) {
                         window.parent.location.href = window.location.href;
+                    } else {
+                        var getHompiUser = function(path) {
+                            var match = path.match(/^\/hompi\/([^\/]+)/);
+                            return match ? match[1] : "{{ user.username|default:'' }}";
+                        };
+                        var parentUser = getHompiUser(window.parent.location.pathname);
+                        var iframeUser = getHompiUser(window.location.pathname);
+                        if (parentUser && iframeUser && parentUser !== iframeUser) {
+                            window.parent.location.href = window.location.href;
+                        }
                     }
                 }
                 
@@ -264,8 +275,7 @@
             <form action="{% url 'accounts:send_friend_request' current_hompi_user.username %}" method="post"
                 style="width: 100%; margin:0;">
                 {% csrf_token %}
-                <button type="submit" class="btn btn-sm btn-primary" style="width: 100%;">💌 {% trans "Request
-                    Friendship" %}</button>
+                <button type="submit" class="btn btn-sm btn-primary" style="width: 100%;">💌 {% trans "Request Friendship" %}</button>
             </form>
             {% endif %}
             {% endif %}
