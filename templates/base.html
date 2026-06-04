@@ -19,9 +19,7 @@
             document.addEventListener("DOMContentLoaded", function() {
                 var iframe = document.getElementById('minihp-iframe');
                 if (iframe) {
-                    var iframeUrl = new URL(window.location.href);
-                    iframeUrl.searchParams.set('iframe', '1');
-                    iframe.src = iframeUrl.pathname + iframeUrl.search + iframeUrl.hash;
+                    iframe.src = window.location.pathname + window.location.search + window.location.hash;
                 }
             });
         } else {
@@ -35,9 +33,7 @@
                     }
                 }
                 
-                var currentUrl = new URL(window.location.href);
-                currentUrl.searchParams.delete('iframe');
-                window.parent.history.replaceState(null, '', currentUrl.pathname + currentUrl.search + currentUrl.hash);
+                window.parent.history.replaceState(null, '', window.location.pathname + window.location.search + window.location.hash);
             } catch(e) {
                 console.error("Iframe script error:", e);
             }
