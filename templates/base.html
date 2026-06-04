@@ -116,11 +116,12 @@
                         {% csrf_token %}
                         <input name="next" type="hidden" value="{{ request.get_full_path }}">
                         <select name="language" onchange="this.form.submit()" class="lang-select">
-                            {% get_current_language as CURRENT_LANG %}
+                            {% get_current_language as LANGUAGE_CODE %}
                             {% get_available_languages as LANGUAGES %}
                             {% for lang in LANGUAGES %}
-                            <option value="{{ lang.0 }}" {% if lang.0 == CURRENT_LANG %}selected{% endif %}>
-                                {{ lang.1 }}
+                            {% get_language_info for lang.0 as info %}
+                            <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %}selected{% endif %}>
+                                {{ info.name_local }}
                             </option>
                             {% endfor %}
                         </select>
