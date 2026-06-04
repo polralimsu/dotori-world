@@ -210,14 +210,12 @@
                 </a>
                 {% endif %}
 
-                {% if user.is_authenticated %}
-                {% if current_hompi_user and user == current_hompi_user %}
+                {% if user.is_authenticated and current_hompi_user and user == current_hompi_user %}
                 <a href="{% url 'posts:write' %}"
                     class="cy-tab {% if '/posts/write/' in request.path %}active{% endif %}"
                     target="minihp-iframe">
                     ✏️ {% trans "Write" %}
                 </a>
-                {% endif %}
                 <a href="{% url 'shop:index' %}" class="cy-tab {% if '/shop/' in request.path %}active{% endif %}"
                     target="minihp-iframe">
                     🌰 {% trans "Shop" %}
