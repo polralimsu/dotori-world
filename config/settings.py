@@ -167,6 +167,8 @@ else:
     MEDIA_ROOT = BASE_DIR / 'media'
     STATIC_URL = '/static/'
 
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
 # Authentication
 LOGIN_URL = 'accounts:login'
 LOGIN_REDIRECT_URL = '/'
