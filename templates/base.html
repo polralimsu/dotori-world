@@ -29,7 +29,7 @@
             try {
                 if (window.parent && typeof window.parent.isAuthenticated !== 'undefined') {
                     if (window.parent.isAuthenticated !== isAuthenticated) {
-                        window.parent.location.reload();
+                        window.parent.location.href = window.location.href;
                     }
                 }
                 
