@@ -51,7 +51,7 @@ a:hover {
     background-color: var(--cy-accent);
     border: 1px solid var(--cy-outer-bg);
     border-radius: 12px;
-    padding: 12px;
+    padding: 15px;
     box-shadow: 0 8px 24px rgba(58, 46, 43, 0.2);
     position: relative;
 }
@@ -59,12 +59,12 @@ a:hover {
 /* Inner Frame Container */
 .cy-container {
     background-color: var(--cy-light-beige);
-    border: 2px dashed #ffffff;
+    border: 1px dashed rgba(255, 255, 255, 0.8);
     border-radius: 8px;
     padding: 15px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 15px;
     min-height: 680px;
 }
 
@@ -73,7 +73,7 @@ a:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
     border-bottom: 1px solid var(--cy-border-color);
     font-size: 12px;
     color: var(--cy-text-light);
@@ -117,6 +117,7 @@ a:hover {
 /* Left Profile Column */
 .cy-left-col {
     width: 220px;
+    height: 590px;
     background: #ffffff;
     border: 1px solid var(--cy-border-color);
     border-radius: 8px;
@@ -124,7 +125,7 @@ a:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
+    gap: 15px;
     flex-shrink: 0;
 }
 
@@ -171,6 +172,15 @@ a:hover {
     color: var(--cy-text-dark);
 }
 
+/* Center Content Column Wrapper */
+.cy-center-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    height: 590px;
+}
+
 /* Center Content Column */
 .cy-center-col {
     flex: 1;
@@ -179,36 +189,27 @@ a:hover {
     border-radius: 8px;
     padding: 20px;
     overflow-y: auto;
-    max-height: 590px;
 }
 
-/* Right Music/BGM Player Column */
-.cy-right-col {
-    width: 250px;
+/* Footer BGM player styles */
+.cy-footer-bgm {
     background: #ffffff;
     border: 1px solid var(--cy-border-color);
     border-radius: 8px;
-    padding: 15px;
+    padding: 10px 15px;
     display: flex;
-    flex-direction: column;
-    gap: 12px;
-    flex-shrink: 0;
-}
-
-/* Retro Cassette/BGM box styles */
-.cy-bgm-box {
-    background: #faf6eb;
-    border: 1px solid var(--cy-border-color);
-    border-radius: 6px;
-    padding: 10px;
-    text-align: center;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    font-size: 12px;
+    color: var(--cy-text-light);
 }
 
 .cy-bgm-title {
     font-weight: 700;
     color: var(--cy-outer-bg);
     font-size: 12px;
-    margin-bottom: 8px;
+    margin-bottom: 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -401,8 +402,21 @@ a:hover {
     .cy-layout {
         flex-direction: column;
     }
-    .cy-left-col, .cy-right-col {
+    .cy-left-col {
         width: 100%;
+        height: auto;
+    }
+    .cy-center-wrap {
+        height: auto;
+    }
+    .cy-footer-bgm {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        text-align: center;
+    }
+    .cy-bgm-title {
+        white-space: normal;
     }
     .cy-tabs {
         position: static;
