@@ -2,9 +2,9 @@ name: Multi-Region ASG Instance Refresh
 
 on:
   workflow_dispatch:
-#  push:
-#    branches:
-#      - master
+  push:
+    branches:
+      - master
 
 permissions:
   id-token: write # GitHub OIDC(OpenID Connect)를 사용하여 AWS Role을 Assume할 때 필수적입니다.
