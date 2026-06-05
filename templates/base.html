@@ -54,6 +54,8 @@
                 try {
                     if (window.parent) {
                         var parentDoc = window.parent.document;
+                        
+                        // 1. Sync tabs
                         var tabs = parentDoc.querySelectorAll('.cy-tabs .cy-tab');
                         var iframePath = window.location.pathname;
                         
@@ -80,9 +82,29 @@
                                 tab.classList.remove('active');
                             }
                         });
+
+                        // 2. Retrieve parent messages if any (lost in top-level redirects)
+                        var parentMessages = parentDoc.querySelector('#inner-layout .messages');
+                        if (parentMessages) {
+                            var centerCol = document.querySelector('.cy-center-col');
+                            if (centerCol) {
+                                var iframeMessages = centerCol.querySelector('.messages');
+                                if (!iframeMessages) {
+                                    iframeMessages = document.createElement('div');
+                                    iframeMessages.className = 'messages';
+                                    centerCol.insertBefore(iframeMessages, centerCol.firstChild);
+                                }
+                                // Move all messages from parent to iframe
+                                while (parentMessages.firstChild) {
+                                    iframeMessages.appendChild(parentMessages.firstChild);
+                                }
+                                // Remove the empty parent messages container
+                                parentMessages.remove();
+                            }
+                        }
                     }
                 } catch (e) {
-                    console.error("Failed to sync parent tabs:", e);
+                    console.error("Failed to sync parent tabs or messages:", e);
                 }
             });
         }
