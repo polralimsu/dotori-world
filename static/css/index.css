@@ -485,3 +485,26 @@ html.is-iframe body {
         height: 600px !important;
     }
 }
+
+/* Standalone Simple Layout (for authentication pages) */
+.cy-auth-container {
+    max-width: 440px;
+    width: 100%;
+    margin: 40px auto;
+    padding: 0 15px;
+}
+
+.simple-layout-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.simple-layout-header a {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--cy-outer-bg);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none !important;
+}

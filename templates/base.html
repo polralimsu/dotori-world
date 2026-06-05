@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}DOTORi World{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/index.css' %}?v=6">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}?v=8">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Share+Tech+Mono&display=swap"
         rel="stylesheet">
     {% block extra_head %}{% endblock %}
@@ -82,29 +82,9 @@
                                 tab.classList.remove('active');
                             }
                         });
-
-                        // 2. Retrieve parent messages if any (lost in top-level redirects)
-                        var parentMessages = parentDoc.querySelector('#inner-layout .messages');
-                        if (parentMessages) {
-                            var centerCol = document.querySelector('.cy-center-col');
-                            if (centerCol) {
-                                var iframeMessages = centerCol.querySelector('.messages');
-                                if (!iframeMessages) {
-                                    iframeMessages = document.createElement('div');
-                                    iframeMessages.className = 'messages';
-                                    centerCol.insertBefore(iframeMessages, centerCol.firstChild);
-                                }
-                                // Move all messages from parent to iframe
-                                while (parentMessages.firstChild) {
-                                    iframeMessages.appendChild(parentMessages.firstChild);
-                                }
-                                // Remove the empty parent messages container
-                                parentMessages.remove();
-                            }
-                        }
                     }
                 } catch (e) {
-                    console.error("Failed to sync parent tabs or messages:", e);
+                    console.error("Failed to sync parent tabs:", e);
                 }
             });
         }

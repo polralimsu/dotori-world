@@ -1,14 +1,10 @@
-{% extends 'base.html' %}
+{% extends 'base_auth.html' %}
 {% load i18n %}
 
 {% block title %}{% trans "Login" %} - DOTORi World{% endblock %}
 
-{% block sidebar %}
-<!-- Hide sidebar on login page -->
-{% endblock %}
-
 {% block content %}
-<div class="aws-card" style="max-width: 400px; margin: 40px auto;">
+<div class="aws-card">
     <div class="aws-card-header">
         <h2>{% trans "Sign In" %}</h2>
     </div>
