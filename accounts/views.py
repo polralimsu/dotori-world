@@ -27,7 +27,6 @@ class SignUpView(CreateView):
         # Save user but keep inactive until email verification
         user = form.save(commit=False)
         user.is_active = False
-        user.save()
 
         # Send activation email
         protocol = 'https' if self.request.is_secure() else 'http'
@@ -39,14 +38,21 @@ class SignUpView(CreateView):
             'uid': urlsafe_base64_encode(force_bytes(user.pk)),
             'token': account_activation_token.make_token(user),
         })
-        send_mail(
-            subject,
-            message,
-            settings.DEFAULT_FROM_EMAIL,
-            [user.email],
-            fail_silently=False,
-        )
-        messages.success(self.request, _('Please check your email to activate your account.'))
+
+        try:
+            send_mail(
+                subject,
+                message,
+                settings.DEFAULT_FROM_EMAIL,
+                [user.email],
+                fail_silently=False,
+            )
+            user.save()
+            messages.success(self.request, _('Please check your email to activate your account.'))
+        except Exception as e:
+            user.delete()
+            messages.error(self.request, f"Error: {e}");
+        
         return redirect(self.success_url)
 
 
