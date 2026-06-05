@@ -4,9 +4,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=1200">
     <title>{% block title %}DOTORi World{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/index.css' %}?v=8">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}?v=9">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Share+Tech+Mono&display=swap"
         rel="stylesheet">
     {% block extra_head %}{% endblock %}
@@ -295,18 +295,20 @@
         <!-- Center Main Content Column Wrapper -->
         <div class="cy-center-wrap">
             <main class="cy-center-col">
-                {% if messages %}
-                <div class="messages">
-                    {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }}">
-                        {{ message }}
+                <div class="cy-center-scroll">
+                    {% if messages %}
+                    <div class="messages">
+                        {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">
+                            {{ message }}
+                        </div>
+                        {% endfor %}
                     </div>
-                    {% endfor %}
-                </div>
-                {% endif %}
+                    {% endif %}
 
-                {% block content %}
-                {% endblock %}
+                    {% block content %}
+                    {% endblock %}
+                </div>
             </main>
         </div>
 
